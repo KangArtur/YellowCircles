@@ -1,17 +1,17 @@
-import io
 import sys
 import random
+from ui_file import Ui_Form
 
 from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QWidget
 
 
-class YellowCircles(QWidget):
+class ColorfulCircles(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         uic.loadUi("UI.ui", self)
-        self.setWindowTitle('Жёлтые круги')
+        self.setWindowTitle('Цветные круги')
         self.initUI()
 
     def initUI(self):
@@ -32,13 +32,13 @@ class YellowCircles(QWidget):
         self.click = False
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         d = random.randint(10, 500)
         qp.drawEllipse(10, 10, d, d)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = YellowCircles()
+    ex = ColorfulCircles()
     ex.show()
     sys.exit(app.exec())
